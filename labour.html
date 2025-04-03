@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Workers - Skyline Labour</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .labour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .labour-card {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .labour-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .labour-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .labour-info {
+            padding: 1.5rem;
+        }
+
+        .labour-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .labour-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .labour-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--light-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .labour-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item i {
+            color: var(--secondary-color);
+        }
+
+        .availability {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .available {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .unavailable {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .filter-section {
+            background: var(--light-gray);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-title p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Skyline Labour</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1>Available Workers</h1>
+            <p>Find skilled and verified workers for your projects</p>
+        </section>
+
+        <section class="filter-section">
+            <div class="container">
+                <input type="text" class="search-bar" placeholder="Search workers by name, skill, or location...">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="skill-filter">Skill Level</label>
+                        <select id="skill-filter">
+                            <option value="">All Levels</option>
+                            <option value="skilled">Skilled</option>
+                            <option value="semi-skilled">Semi-Skilled</option>
+                            <option value="unskilled">Unskilled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="location-filter">Location</label>
+                        <select id="location-filter">
+                            <option value="">All Locations</option>
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="east">East</option>
+                            <option value="west">West</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="availability-filter">Availability</label>
+                        <select id="availability-filter">
+                            <option value="">All</option>
+                            <option value="available">Available Now</option>
+                            <option value="unavailable">Currently Working</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="experience-filter">Experience</label>
+                        <select id="experience-filter">
+                            <option value="">Any Experience</option>
+                            <option value="0-2">0-2 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5+">5+ years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="labour-grid">
+            <!-- Worker Card 1 -->
+            <div class="labour-card">
+                <img src="images/worker1.jpg" alt="Rajesh Kumar" class="labour-image">
+                <div class="labour-info">
+                    <h3 class="labour-name">Rajesh Kumar</h3>
+                    <p class="labour-title">Skilled Mason</p>
+                    <div class="labour-skills">
+                        <span class="skill-tag">Masonry</span>
+                        <span class="skill-tag">Concrete Work</span>
+                        <span class="skill-tag">Tile Installation</span>
+                    </div>
+                    <div class="labour-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Mumbai, Maharashtra</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>8 years experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-star"></i>
+                            <span>4.8/5 rating</span>
+                        </div>
+                    </div>
+                    <span class="availability available">Available Now</span>
+                </div>
+            </div>
+
+            <!-- Worker Card 2 -->
+            <div class="labour-card">
+                <img src="images/worker2.jpg" alt="Amit Singh" class="labour-image">
+                <div class="labour-info">
+                    <h3 class="labour-name">Amit Singh</h3>
+                    <p class="labour-title">Carpenter</p>
+                    <div class="labour-skills">
+                        <span class="skill-tag">Woodworking</span>
+                        <span class="skill-tag">Furniture Making</span>
+                        <span class="skill-tag">Door Installation</span>
+                    </div>
+                    <div class="labour-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Delhi, NCR</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>5 years experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-star"></i>
+                            <span>4.6/5 rating</span>
+                        </div>
+                    </div>
+                    <span class="availability unavailable">Currently Working</span>
+                </div>
+            </div>
+
+            <!-- Worker Card 3 -->
+            <div class="labour-card">
+                <img src="images/worker3.jpg" alt="Priya Sharma" class="labour-image">
+                <div class="labour-info">
+                    <h3 class="labour-name">Priya Sharma</h3>
+                    <p class="labour-title">Electrician</p>
+                    <div class="labour-skills">
+                        <span class="skill-tag">Electrical Wiring</span>
+                        <span class="skill-tag">Maintenance</span>
+                        <span class="skill-tag">Safety Compliance</span>
+                    </div>
+                    <div class="labour-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bangalore, Karnataka</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>3 years experience</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-star"></i>
+                            <span>4.9/5 rating</span>
+                        </div>
+                    </div>
+                    <span class="availability available">Available Now</span>
+                </div>
+            </div>
+
+            <!-- Add more worker cards as needed -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Skyline Labour</h3>
+                    <p>Your trusted partner in construction workforce management.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Skyline Labour. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
